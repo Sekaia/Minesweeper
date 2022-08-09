@@ -24,7 +24,7 @@ class Cell:
             location,
             width=12, # change later
             height=4, # change later
-            text=f'{self.x}, {self.y}'
+            text=''
         )
         btn.bind('<Button-1>', self.left_click_actions) # Left Click
         btn.bind('<Button-3>', self.right_click_actions) # Right Click
@@ -32,8 +32,37 @@ class Cell:
 
 
     def left_click_actions(self, event):
-        print(event)
-        print("I am left clicked!")
+        if self.is_mine:
+            self.show_mine()
+        else:
+            self.show_cell()
+
+
+    def get_cell_by_axis(self, x, y):
+        # Return a cell object based on the value of x and y
+        for cell in Cell.all:
+            if cell.x == x and cell.y == y:
+                return cell
+
+
+    def show_cell(self):
+        surrounded_cells = [
+            self.get_cell_by_axis(self.x - 1, self.y - 1),
+            self.get_cell_by_axis(self.x - 1, self.y),
+            self.get_cell_by_axis(self.x - 1, self.y + 1),
+            self.get_cell_by_axis(self.x, self.y - 1),
+            self.get_cell_by_axis(self.x + 1, self.y - 1),
+            self.get_cell_by_axis(self.x + 1, self.y),
+            self.get_cell_by_axis(self.x + 1, self.y + 1),
+            self.get_cell_by_axis(self.x, self.y + 1)
+        ]
+        surrounded_cells = [cell for cell in surrounded_cells if cell is not None]
+        print(surrounded_cells)
+
+
+    def show_mine(self):
+        # A logic to interrupt the game and display a message that player lost
+        self.cell_btn_object.configure(bg = "red")
 
 
     def right_click_actions(self, event):
