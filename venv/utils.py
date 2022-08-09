@@ -7,3 +7,11 @@ def height_prct(percentage):
 
 def width_prct(percentage):
     return (settings.WIDTH / 100) * percentage
+
+
+# def cell_height():
+#     change button size
+#
+#
+# def cell_width():
+#     change button size
