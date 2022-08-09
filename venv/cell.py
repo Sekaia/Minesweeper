@@ -1,6 +1,9 @@
+import sys
 from tkinter import Button, Label
 import random
 import settings
+import ctypes
+import sys
 
 
 class Cell:
@@ -105,8 +108,10 @@ class Cell:
 
 
     def show_mine(self):
-        # A logic to interrupt the game and display a message that player lost
-        self.cell_btn_object.configure(bg = "red")
+        self.cell_btn_object.configure(bg="red")
+        ctypes.windll.user32.MessageBoxW(0, "You clicked on a mine", "Game over!", 0)
+        sys.exit()
+
 
 
     def right_click_actions(self, event):
